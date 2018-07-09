@@ -21,7 +21,7 @@ using namespace std;
 #define pi M_PI
 complex<double> I (0.0,1.0);
 
-#define N 6    //rough angles
+#define N 20    //rough angles
 #define Nb 2    //band index
 #define No 2    //orbital index
 #define Ns 1    //finer angle for integration within one patch
@@ -260,6 +260,8 @@ int main(int argc, char *argv[])
 			
 			if ((count-1) % 50 == 0)
 			{
+				trafozuorbital();
+				
 				for (int k1=0;k1<N;k1++)
 				for (int q1=0;q1<Nq;q1++)
 				for (int b1=0;b1<Nb;b1++)
@@ -268,29 +270,21 @@ int main(int argc, char *argv[])
 						for (int q3=0;q3<Nq;q3++)
 						for (int b3=0;b3<Nb;b3++)
 							for (int b4=0;b4<Nb;b4++)
-								vdiagout << real(V[k1][q1][b1][k1][(q1+Nq/2)%Nq][b2][k3][q3][b3][b4]) << " ";
+								vdiagout << real(O[k1][q1][b1][k1][(q1+Nq/2)%Nq][b2][k3][q3][b3][b4]) << " ";
 				vdiagout << std::endl;
 				
+				vflowout << lam << " ";
 				for (int k1=0;k1<N;k1++)
-					for (int q1=0;q1<Nq;q1++)
-						for (int b1=0;b1<Nb;b1++)
-							
-							for (int k2=0;k2<N;k2++)
-								for (int q2=0;q2<Nq;q2++)
-									for (int b2=0;b2<Nb;b2++)
-										
-										for (int k3=0;k3<N;k3++)
-											for (int q3=0;q3<Nq;q3++)
-												for (int b3=0;b3<Nb;b3++)
-													
-													for (int b4=0;b4<Nb;b4++)
-													{
-														//-------------------------------------------------------------------
-														//singlet channel:
-
-														//vertex in band basis
-														vflowout<<real(V[k1][q1][b1][k2][q2][b2][k3][q3][b3][b4])<<" ";
-													}
+				for (int q1=0;q1<Nq;q1++)
+				for (int b1=0;b1<Nb;b1++)
+					for (int k2=0;k2<N;k2++)
+					for (int q2=0;q2<Nq;q2++)
+					for (int b2=0;b2<Nb;b2++)
+						for (int k3=0;k3<N;k3++)
+						for (int q3=0;q3<Nq;q3++)
+						for (int b3=0;b3<Nb;b3++)
+							for (int b4=0;b4<Nb;b4++)
+								vflowout<<real(O[k1][q1][b1][k2][q2][b2][k3][q3][b3][b4])<<" ";
 				vflowout<<std::endl;
 				
 				for (int ks=0;ks<N;ks++)
@@ -311,7 +305,7 @@ int main(int argc, char *argv[])
 
 			if(vmax>vmaxstop)break;
 
-			if(count==301)break;
+			if(count==401)break;
 
 			if(lam < 0.0001*T)break;
 		}
