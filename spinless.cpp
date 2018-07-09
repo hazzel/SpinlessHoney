@@ -258,7 +258,7 @@ int main(int argc, char *argv[])
 			cout<<"-----------------------------------------------------------"<<endl;
 			cout<<""<<endl;
 			
-			if ((count-1) % 50 == 0)
+			if ((count-1) % 25 == 0)
 			{
 				trafozuorbital();
 				
